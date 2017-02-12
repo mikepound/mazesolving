@@ -20,13 +20,13 @@ class Maze:
 		
 		# Start row
 		for x in range (1, width - 1):
-			if data[x] == True:
+			if data[x] > 0:
 				self.start = Maze.Node((0,x));
 				topnodes[x] = self.start;
 				count += 1;
 
 		for y in range (1, height - 1):
-			#print ("row", str(y));
+			#print ("row", str(y)); # Uncomment this line to keep a track of row progress
 			
 			rowoffset = y * width;
 			rowaboveoffset = rowoffset - width;
@@ -99,7 +99,7 @@ class Maze:
 		# End row
 		rowoffset = (height - 1) * width;
 		for x in range (1, width - 1):
-			if data[rowoffset + x] == True:
+			if data[rowoffset + x] > 0:
 				self.end = Maze.Node((height - 1,x));
 				t = topnodes[x];
 				t.Neighbours[2] = self.end;

@@ -27,7 +27,7 @@ maze = Maze(im);
 t1 = time.time()
 print ("Node Count:", maze.count);
 total = t1-t0
-print ("Time elapsed:", total, "s\n");
+print ("Time elapsed:", total, "\n");
 
 # Create and run solver
 [title, solver] = sf.createsolver(args.method);
@@ -45,7 +45,7 @@ if (stats[2]):
 	print ("Path found, length", stats[1]);
 else:
 	print ("No Path Found");
-print ("Time elapsed: ", total, "s\n");
+print ("Time elapsed: ", total, "\n");
 
 """
 Create and save the output image.
