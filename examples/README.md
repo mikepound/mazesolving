@@ -5,6 +5,8 @@ A few example mazes compatible with this solver. A brief desciption:
 - small: Quite small!
 - normal: I used this for testing a lot - 41x41 perfect maze (with one solution).
 
+- logo: A maze that includes the computerphile logo, it still has a few solutions I believe, though I had to hack about with it so there may now only be one.
+
 - perfect2k/4k/10k: Perfect mazes, only one solution to each, various sizes. The 10k image is 100 megapixels, so use with care.
 
 - braid200: A small braid maze. Braid mazes have multiple solutions.
