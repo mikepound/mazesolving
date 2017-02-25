@@ -1,4 +1,4 @@
-from priority_queue import FibPQ
+from priority_queue import FibPQ, HeapPQ
 
 def solve(maze):
     # Width is used for indexing, total is used for array sizes
@@ -22,8 +22,9 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    # The priority queue. We are using a Fibonacci heap in this case.
-    unvisited = FibPQ()
+    # The priority queue. There are multiple implementations in priority_queue.py
+    # unvisited = FibPQ()
+    unvisited = HeapPQ()
 
     # This index holds all priority queue nodes as they are created. We use this to decrease the key of a specific node when a shorter path is found.
     # This isn't hugely memory efficient, but likely to be faster than a dictionary or similar.
@@ -48,7 +49,7 @@ def solve(maze):
         unvisited.removeminimum()
 
         # Current node u, all neighbours will be v
-        u = n.value
+        u = n
         upos = u.Position
         uposindex = upos[0] * width + upos[1]
 

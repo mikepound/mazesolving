@@ -1,4 +1,4 @@
-from priority_queue import FibPQ
+from priority_queue import FibPQ, HeapPQ
 
 # This implementatoin of A* is almost identical to the Dijkstra implementation. So for clarity I've removed all comments, and only added those
 # Specifically showing the difference between dijkstra and A*
@@ -18,7 +18,9 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    unvisited = FibPQ()
+    # The priority queue. There are multiple implementations in priority_queue.py
+    # unvisited = FibPQ()
+    unvisited = HeapPQ()
 
     nodeindex = [None] * total
 
@@ -36,7 +38,7 @@ def solve(maze):
         n = unvisited.minimum()
         unvisited.removeminimum()
 
-        u = n.value
+        u = n
         upos = u.Position
         uposindex = upos[0] * width + upos[1]
 
