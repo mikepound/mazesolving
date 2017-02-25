@@ -9,7 +9,7 @@ import argparse
 sf = SolverFactory()
 parser = argparse.ArgumentParser()
 parser.add_argument("-m", "--method", nargs='?', const=sf.Default, default=sf.Default,
-						choices=sf.Choices)
+                                                choices=sf.Choices)
 parser.add_argument("input_file")
 parser.add_argument("output_file")
 args = parser.parse_args()
@@ -42,9 +42,9 @@ total = t1-t0
 # Print solve stats
 print ("Nodes explored: ", stats[0])
 if (stats[2]):
-	print ("Path found, length", stats[1])
+    print ("Path found, length", stats[1])
 else:
-	print ("No Path Found")
+    print ("No Path Found")
 print ("Time elapsed: ", total, "\n")
 
 """
@@ -69,21 +69,21 @@ length = len(resultpath)
 
 px = [0, 0, 0]
 for i in range(0, length - 1):
-	a = resultpath[i]
-	b = resultpath[i+1]
+    a = resultpath[i]
+    b = resultpath[i+1]
 
-	# Blue - red
-	px[0] = int((i / length) * 255)
-	px[2] = 255 - px[0]
+    # Blue - red
+    px[0] = int((i / length) * 255)
+    px[2] = 255 - px[0]
 
-	if a[0] == b[0]:
-		# Ys equal - horizontal line
-		for x in range(min(a[1],b[1]), max(a[1],b[1])):
-			out[a[0],x,:] = px
-	elif a[1] == b[1]:
-		# Xs equal - vertical line
-		for y in range(min(a[0],b[0]), max(a[0],b[0]) + 1):
-			out[y,a[1],:] = px
+    if a[0] == b[0]:
+        # Ys equal - horizontal line
+        for x in range(min(a[1],b[1]), max(a[1],b[1])):
+            out[a[0],x,:] = px
+    elif a[1] == b[1]:
+        # Xs equal - vertical line
+        for y in range(min(a[0],b[0]), max(a[0],b[0]) + 1):
+            out[y,a[1],:] = px
 
 img = Image.fromarray(out)
 img.save(args.output_file)
