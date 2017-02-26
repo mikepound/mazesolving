@@ -21,8 +21,8 @@ def solve(maze):
 
     # The priority queue. There are multiple implementations in priority_queue.py
     # unvisited = FibHeap()
-    # unvisited = HeapPQ()
-    unvisited = FibPQ()
+    unvisited = HeapPQ()
+    # unvisited = FibPQ()
     # unvisited = QueuePQ()
 
     nodeindex = [None] * total
@@ -38,8 +38,7 @@ def solve(maze):
     while len(unvisited) > 0:
         count += 1
 
-        n = unvisited.minimum()
-        unvisited.removeminimum()
+        n = unvisited.removeminimum()
 
         u = n.value
         upos = u.Position

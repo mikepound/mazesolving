@@ -25,8 +25,8 @@ def solve(maze):
 
     # The priority queue. There are multiple implementations in priority_queue.py
     # unvisited = FibHeap()
-    # unvisited = HeapPQ()
-    unvisited = FibPQ()
+    unvisited = HeapPQ()
+    # unvisited = FibPQ()
     # unvisited = QueuePQ()
 
     # This index holds all priority queue nodes as they are created. We use this to decrease the key of a specific node when a shorter path is found.
@@ -48,8 +48,7 @@ def solve(maze):
         count += 1
 
         # Find current shortest path point to explore
-        n = unvisited.minimum()
-        unvisited.removeminimum()
+        n = unvisited.removeminimum()
 
         # Current node u, all neighbours will be v
         u = n.value

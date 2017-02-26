@@ -38,7 +38,7 @@ class FibPQ(PriorityQueue):
         return self.heap.minimum()
 
     def removeminimum(self):
-        self.heap.removeminimum()
+        return self.heap.removeminimum()
 
     def decreasekey(self, node, new_priority):
         self.heap.decreasekey(node, new_priority)
@@ -67,10 +67,12 @@ class HeapPQ(PriorityQueue):
 
     def removeminimum(self):
         while True:
-            candidate = heapq.heappop(self.pq)
-            if candidate not in self.removed:
+            (priority, item) = heapq.heappop(self.pq)
+            if (priority, item) in self.removed:
+                self.removed.discard((priority, item))
+            else:
                 self.count -= 1
-                break
+                return FibHeap.Node(priority, item)
 
     def remove(self, node):
         entry = node.key, node.value
@@ -108,10 +110,12 @@ class QueuePQ(PriorityQueue):
 
     def removeminimum(self):
         while True:
-            candidate = self.pq.get_nowait()
-            if candidate not in self.removed:
+            (priority, item) = self.pq.get_nowait()
+            if (priority, item) in self.removed:
+                self.removed.discard((priority, item))
+            else:
                 self.count -= 1
-                break
+                return FibHeap.Node(priority, item)
 
     def remove(self, node):
         entry = node.key, node.value

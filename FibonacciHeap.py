@@ -93,6 +93,7 @@ class FibHeap:
         if self.minnode == None:
             raise AssertionError("Cannot remove from an empty heap")
 
+        removed_node = self.minnode
         self.count -= 1
 
         # 1: Assign all old root children as new roots
@@ -113,7 +114,7 @@ class FibHeap:
             if self.count != 0:
                 raise AssertionError("Heap error: Expected 0 keys, count is " + str(self.count))
             self.minnode = None
-            return
+            return removed_node
 
         # 2.2: Merge any roots with the same degree
         logsize = 100
@@ -153,6 +154,8 @@ class FibHeap:
                     newmaxdegree = d
 
         maxdegree = newmaxdegree
+
+        return removed_node
 
 
     def decreasekey(self, node, newkey):
