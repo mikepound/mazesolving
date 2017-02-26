@@ -1,4 +1,5 @@
-from priority_queue import FibPQ, HeapPQ
+from FibonacciHeap import FibHeap
+from priority_queue import FibPQ, HeapPQ, QueuePQ
 
 def solve(maze):
     # Width is used for indexing, total is used for array sizes
@@ -23,8 +24,10 @@ def solve(maze):
     distances = [infinity] * total
 
     # The priority queue. There are multiple implementations in priority_queue.py
-    # unvisited = FibPQ()
-    unvisited = HeapPQ()
+    # unvisited = FibHeap()
+    # unvisited = HeapPQ()
+    unvisited = FibPQ()
+    # unvisited = QueuePQ()
 
     # This index holds all priority queue nodes as they are created. We use this to decrease the key of a specific node when a shorter path is found.
     # This isn't hugely memory efficient, but likely to be faster than a dictionary or similar.
@@ -32,7 +35,7 @@ def solve(maze):
 
     # To begin, we set the distance to the start to zero (we're there) and add it into the unvisited queue
     distances[start.Position[0] * width + start.Position[1]] = 0
-    startnode = (0, start)
+    startnode = FibHeap.Node(0, start)
     nodeindex[start.Position[0] * width + start.Position[1]] = startnode
     unvisited.insert(startnode)
 
@@ -49,7 +52,7 @@ def solve(maze):
         unvisited.removeminimum()
 
         # Current node u, all neighbours will be v
-        u = n
+        u = n.value
         upos = u.Position
         uposindex = upos[0] * width + upos[1]
 
@@ -79,7 +82,7 @@ def solve(maze):
                         vnode = nodeindex[vposindex]
                         # v isn't already in the priority queue - add it
                         if vnode == None:
-                            vnode = (newdistance, v)
+                            vnode = FibHeap.Node(newdistance, v)
                             unvisited.insert(vnode)
                             nodeindex[vposindex] = vnode
                             distances[vposindex] = newdistance
