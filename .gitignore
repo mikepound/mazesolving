@@ -1,1 +1,6 @@
 /__pycache__
+*.pyc
+
+# Text editor temp files
+*~
+\#*\#
