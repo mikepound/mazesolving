@@ -24,6 +24,7 @@ class Maze:
                 self.start = Maze.Node((0,x))
                 topnodes[x] = self.start
                 count += 1
+                break
 
         for y in range (1, height - 1):
             #print ("row", str(y)) # Uncomment this line to keep a track of row progress
@@ -105,6 +106,7 @@ class Maze:
                 t.Neighbours[2] = self.end
                 self.end.Neighbours[0] = t
                 count += 1
+                break
 
         self.count = count
         self.width = width
