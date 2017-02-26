@@ -1,4 +1,3 @@
-import numpy as np
 from PIL import Image
 import time
 from mazes import Maze
@@ -43,42 +42,35 @@ def solve(factory, method, input_file, output_file):
     Create and save the output image.
     This is simple drawing code that travels between each node in turn, drawing either
     a horizontal or vertical line as required. Line colour is roughly interpolated between
-    blue and red depending on how far down the path this section is. Dependency on numpy
-    should be easy to remove at some point.
+    blue and red depending on how far down the path this section is.
     """
 
     print ("Saving Image")
-    mazeimage = np.array(im)
-    imout = np.array(mazeimage)
-    imout[imout==1] = 255
-    out = imout[:,:,np.newaxis]
-
-    out = np.repeat(out, 3, axis=2)
+    im = im.convert('RGB')
+    impixels = im.load()
 
     resultpath = [n.Position for n in result]
 
     length = len(resultpath)
 
-    px = [0, 0, 0]
     for i in range(0, length - 1):
         a = resultpath[i]
         b = resultpath[i+1]
 
         # Blue - red
-        px[0] = int((i / length) * 255)
-        px[2] = 255 - px[0]
+        r = int((i / length) * 255)
+        px = (r, 0, 255 - r)
 
         if a[0] == b[0]:
             # Ys equal - horizontal line
             for x in range(min(a[1],b[1]), max(a[1],b[1])):
-                out[a[0],x,:] = px
+                impixels[x,a[0]] = px
         elif a[1] == b[1]:
             # Xs equal - vertical line
             for y in range(min(a[0],b[0]), max(a[0],b[0]) + 1):
-                out[y,a[1],:] = px
+                impixels[a[1],y] = px
 
-    img = Image.fromarray(out)
-    img.save(output_file)
+    im.save(output_file)
 
 
 def main():
