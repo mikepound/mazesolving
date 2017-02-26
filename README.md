@@ -23,3 +23,5 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 - Mazes don't need to be square - as long as they are surrounded by black walls. The input image will obviously be square.
 - Large areas of white, using my algorithm, will essentially degenerate into an inefficient flood fill - avoid!
 
+- Regarding pull requests and issue tracking. I'm not actively developing this project over the long term. Mostly I want the code to be as it was (at least in general function) at the time of the video. I've accepted some obvious improvements already from people, but if you're looking to add a pull request because you've added to or altered the functionality in a big way, I'd prefer you avoided that.
+
