@@ -1,4 +1,5 @@
 from FibonacciHeap import FibHeap
+from priority_queue import FibPQ, HeapPQ, QueuePQ
 
 def solve(maze):
     # Width is used for indexing, total is used for array sizes
@@ -22,8 +23,11 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    # The priority queue. We are using a Fibonacci heap in this case.
-    unvisited = FibHeap()
+    # The priority queue. There are multiple implementations in priority_queue.py
+    # unvisited = FibHeap()
+    unvisited = HeapPQ()
+    # unvisited = FibPQ()
+    # unvisited = QueuePQ()
 
     # This index holds all priority queue nodes as they are created. We use this to decrease the key of a specific node when a shorter path is found.
     # This isn't hugely memory efficient, but likely to be faster than a dictionary or similar.
@@ -40,12 +44,11 @@ def solve(maze):
     completed = False
 
     # Begin Dijkstra - continue while there are unvisited nodes in the queue
-    while unvisited.count > 0:
+    while len(unvisited) > 0:
         count += 1
 
         # Find current shortest path point to explore
-        n = unvisited.minimum()
-        unvisited.removeminimum()
+        n = unvisited.removeminimum()
 
         # Current node u, all neighbours will be v
         u = n.value
