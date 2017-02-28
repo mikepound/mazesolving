@@ -7,8 +7,8 @@ class Maze:
 
     def __init__(self, im):
 
-        width = im.width
-        height = im.height
+        width = im.size[0]
+        height = im.size[1]
         data = list(im.getdata(0))
 
         self.start = None
