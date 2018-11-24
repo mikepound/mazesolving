@@ -8,6 +8,7 @@ event2canvas = lambda e, c: (c.canvasx(e.x), c.canvasy(e.y))
 
 if __name__ == "__main__":
     root = Tk()
+    root.title("Maza Creator")
     Vline = []
     Hline = []
     ColoredPixels = []
@@ -83,7 +84,7 @@ if __name__ == "__main__":
     Algorithm1.grid(column = 0,row = 2,pady=(0,10))
     Algorithm2 = Radiobutton(options1, text="Depth First", variable=AlgoVar, value=1, bg="#242526", activebackground="#242526", fg="#0c9cfc", font="verdana 10 bold")
     Algorithm2.grid(column = 0,row = 3,pady=(0,10))
-    #Algorithm3 = Radiobutton(options1, text="Dijastra", variable=AlgoVar, value=2, bg="#242526", activebackground="#242526", fg="#0c9cfc", font="verdana 10 bold")
+    #Algorithm3 = Radiobutton(options1, text="Dijkstra", variable=AlgoVar, value=2, bg="#242526", activebackground="#242526", fg="#0c9cfc", font="verdana 10 bold")
     #Algorithm3.grid(column = 0,row = 4,pady=(0,10))
     #Algorithm4 = Radiobutton(options1, text="A star", variable=AlgoVar, value=3, bg="#242526", activebackground="#242526", fg="#0c9cfc", font="verdana 10 bold")
     #Algorithm4.grid(column = 0,row = 5,pady=(0,10))
