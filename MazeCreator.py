@@ -8,7 +8,7 @@ event2canvas = lambda e, c: (c.canvasx(e.x), c.canvasy(e.y))
 
 if __name__ == "__main__":
     root = Tk()
-    root.title("Maza Creator")
+    root.title("Maze Creator")
     Vline = []
     Hline = []
     ColoredPixels = []
