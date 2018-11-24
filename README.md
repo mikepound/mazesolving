@@ -29,5 +29,6 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 It is created using Tkinter Library
 - To use: python MazeCreator.py
 
-![mazecreator](https://user-images.githubusercontent.com/32388461/48971838-60aa8e00-f045-11e8-9d55-605fb64b508f.png)
+![screenshot 292](https://user-images.githubusercontent.com/32388461/48971875-e6c6d480-f045-11e8-87da-3611d390f139.png)
+
 
