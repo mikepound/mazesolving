@@ -28,3 +28,7 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 ## Maze Creator
 It is created using Tkinter Library
 - To use: python MazeGenerator.py
+
+## Maze Creator
+It is created using Tkinter Library
+- To use: python MazeGenerator.py
