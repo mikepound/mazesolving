@@ -48,7 +48,7 @@ if __name__ == "__main__":
             canvas.bind("<B1-Motion>",SingleColorBlack)
             canvas.bind("<B3-Motion>",SingleColorWhite)
         except:
-            print("Invalid")
+            print("Invalid Input")
     
     def GeneratedPath():
         global AlgoVar
