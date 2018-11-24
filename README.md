@@ -27,7 +27,7 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 
 ## Maze Creator
 It is created using Tkinter Library
-- To use: python MazeGenerator.py
+- To use: python MazeCreator.py
 
 ![mazecreator](https://user-images.githubusercontent.com/32388461/48969704-5ded7000-f028-11e8-89d2-6dcb68e4eba1.png)
 
