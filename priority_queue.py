@@ -4,7 +4,7 @@ import itertools
 
 from FibonacciHeap import FibHeap
 import heapq
-import Queue
+import queue
 
 class PriorityQueue():
     __metaclass__ = ABCMeta
