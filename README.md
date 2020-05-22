@@ -25,3 +25,10 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 - Mazes don't need to be square - as long as they are surrounded by black walls. The input image will obviously be square.
 - Large areas of white, using my algorithm, will essentially degenerate into an inefficient flood fill - avoid!
 
+## Maze Creator
+It is created using Tkinter Library
+- To use: python MazeCreator.py
+
+![screenshot 292](https://user-images.githubusercontent.com/32388461/48971875-e6c6d480-f045-11e8-87da-3611d390f139.png)
+
+
