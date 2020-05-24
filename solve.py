@@ -9,7 +9,10 @@ import argparse
 
 def solve(factory, method, input_file, output_file):
     # Load Image
-    print ("Loading Image")
+
+    # Set this flag for extremely large mazes, as PIL thinks they are a decompression DOS attack, and PIL will throw an error.  This suppresses that error.
+    Image.MAX_IMAGE_PIXELS = None
+
     im = Image.open(input_file)
 
     # Create the maze (and time it) - for many mazes this is more time consuming than solving the maze
