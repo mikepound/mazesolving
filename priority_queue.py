@@ -4,7 +4,7 @@ import itertools
 
 from FibonacciHeap import FibHeap
 import heapq
-import Queue
+import queue
 
 class PriorityQueue():
     __metaclass__ = ABCMeta
@@ -88,7 +88,7 @@ class HeapPQ(PriorityQueue):
 
 class QueuePQ(PriorityQueue):
     def __init__(self):
-        self.pq = Queue.PriorityQueue()
+        self.pq = queue.PriorityQueue()
         self.removed = set()
         self.count = 0
 
