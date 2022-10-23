@@ -11,7 +11,7 @@ Image.MAX_IMAGE_PIXELS = None
 # Read command line arguments - the python argparse class is convenient here.
 
 
-def solve(factory, method, input_file, output_file):
+def solve(factory, method: str = "breadthfirst", input_file: str = None, output_file: str = None):
     # Load Image
     print("Loading Image")
     im = Image.open(input_file)
@@ -75,6 +75,11 @@ def solve(factory, method, input_file, output_file):
             for y in range(min(a[0], b[0]), max(a[0], b[0]) + 1):
                 impixels[a[1], y] = px
 
+    if not output_file:
+        output_file = input_file.split(".")
+        output_file[0] = output_file[0] + "OP"
+        output_file = ".".join(output_file)
+
     im.save(output_file)
 
 
@@ -86,8 +91,7 @@ def main():
                         choices=sf.Choices, help="Method to be used on solving the maze")
     parser.add_argument("-i", "--input", required=True,
                         help="Image of the maze input file")
-    parser.add_argument("-o", "--output", required=True,
-                        help="Solved output maze file")
+    parser.add_argument("-o", "--output", help="Solved output maze file")
     args = parser.parse_args()
 
     solve(sf, args.method, args.input, args.output)
