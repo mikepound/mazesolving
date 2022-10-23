@@ -5,7 +5,7 @@ from mazes import Maze
 from factory import SolverFactory
 Image.MAX_IMAGE_PIXELS = None
 
-# while running use
+# usage:
 #!  python3 solve.py -m depthfirst/breadthfirst ./small.png ./small-copy.png
 
 # Read command line arguments - the python argparse class is convenient here.
@@ -80,14 +80,17 @@ def solve(factory, method, input_file, output_file):
 
 def main():
     sf = SolverFactory()
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Maze Solving using Image Processing")
     parser.add_argument("-m", "--method", nargs='?', const=sf.Default, default=sf.Default,
-                        choices=sf.Choices)
-    parser.add_argument("input_file")
-    parser.add_argument("output_file")
+                        choices=sf.Choices, help="Method to be used on solving the maze")
+    parser.add_argument("-i", "--input", required=True,
+                        help="Image of the maze input file")
+    parser.add_argument("-o", "--output", required=True,
+                        help="Solved output maze file")
     args = parser.parse_args()
 
-    solve(sf, args.method, args.input_file, args.output_file)
+    solve(sf, args.method, args.input, args.output)
 
 
 if __name__ == "__main__":
