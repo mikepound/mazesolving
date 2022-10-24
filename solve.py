@@ -77,7 +77,7 @@ def solve(factory, method: str = "breadthfirst", input_file: str = None, output_
 
     if not output_file:
         output_file = input_file.split(".")
-        output_file[0] = output_file[0] + "OP"
+        output_file[0] = output_file[0] + method + "OP"
         output_file = ".".join(output_file)
 
     im.save(output_file)
