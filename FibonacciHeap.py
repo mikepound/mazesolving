@@ -11,6 +11,18 @@ class FibHeap:
             self.parent = self.child = None
             self.previous = self.next = self
 
+        def __lt__(self, other) -> bool:
+            if self.key < other.key:
+                return True
+            else:
+                return False
+
+        def __le__(self, other) -> bool:
+            if self.key <= other.key:
+                return True
+            else:
+                return False
+
         def issingle(self):
             return self == self.next
 
@@ -22,7 +34,6 @@ class FibHeap:
             node.previous.next = self.next
             self.next = node
             node.previous = self
-
 
         def remove(self):
             self.previous.next = self.next
@@ -40,11 +51,13 @@ class FibHeap:
 
         def removechild(self, node):
             if node.parent != self:
-                raise AssertionError("Cannot remove child from a node that is not its parent")
+                raise AssertionError(
+                    "Cannot remove child from a node that is not its parent")
 
             if node.issingle():
                 if self.child != node:
-                    raise AssertionError("Cannot remove a node that is not a child")
+                    raise AssertionError(
+                        "Cannot remove a node that is not a child")
                 self.child = None
             else:
                 if self.child == node:
@@ -56,7 +69,7 @@ class FibHeap:
             self.degree -= 1
     #### End of Node Class ####
 
-    def __init__ (self):
+    def __init__(self):
         self.minnode = None
         self.count = 0
         self.maxdegree = 0
@@ -112,7 +125,8 @@ class FibHeap:
         # 2.1: If we have removed the last key
         if self.minnode.next == self.minnode:
             if self.count != 0:
-                raise AssertionError("Heap error: Expected 0 keys, count is " + str(self.count))
+                raise AssertionError(
+                    "Heap error: Expected 0 keys, count is " + str(self.count))
             self.minnode = None
             return removed_node
 
@@ -146,7 +160,7 @@ class FibHeap:
         # 3: Remove current root and find new minnode
         self.minnode = None
         newmaxdegree = 0
-        for d in range (0,logsize):
+        for d in range(0, logsize):
             if degreeroots[d] != None:
                 degreeroots[d].next = degreeroots[d].previous = degreeroots[d]
                 self._insertnode(degreeroots[d])
@@ -157,11 +171,10 @@ class FibHeap:
 
         return removed_node
 
-
     def decreasekey(self, node, newkey):
         if newkey > node.key:
             #import code
-            #code.interact(local=locals())
+            # code.interact(local=locals())
             raise AssertionError("Cannot decrease a key to a greater value")
         elif newkey == node.key:
             return
