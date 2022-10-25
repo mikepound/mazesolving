@@ -5,6 +5,18 @@ class Maze:
             self.Neighbours = [None, None, None, None]
             #self.Weights = [0, 0, 0, 0]
 
+        def __lt__(self, other) -> bool:
+            if self.Position < other.Position:
+                return True
+            else:
+                return False
+
+        def __le__(self, other) -> bool:
+            if self.Position <= other.Position:
+                return True
+            else:
+                return False
+
     def __init__(self, im):
 
         width = im.size[0]
@@ -19,15 +31,15 @@ class Maze:
         count = 0
 
         # Start row
-        for x in range (1, width - 1):
+        for x in range(1, width - 1):
             if data[x] > 0:
-                self.start = Maze.Node((0,x))
+                self.start = Maze.Node((0, x))
                 topnodes[x] = self.start
                 count += 1
                 break
 
-        for y in range (1, height - 1):
-            #print ("row", str(y)) # Uncomment this line to keep a track of row progress
+        for y in range(1, height - 1):
+            # print ("row", str(y)) # Uncomment this line to keep a track of row progress
 
             rowoffset = y * width
             rowaboveoffset = rowoffset - width
@@ -40,7 +52,7 @@ class Maze:
 
             leftnode = None
 
-            for x in range (1, width - 1):
+            for x in range(1, width - 1):
                 # Move prev, current and next onwards. This way we read from the image once per pixel, marginal optimisation
                 prv = cur
                 cur = nxt
@@ -57,14 +69,14 @@ class Maze:
                         # PATH PATH PATH
                         # Create node only if paths above or below
                         if data[rowaboveoffset + x] > 0 or data[rowbelowoffset + x] > 0:
-                            n = Maze.Node((y,x))
+                            n = Maze.Node((y, x))
                             leftnode.Neighbours[1] = n
                             n.Neighbours[3] = leftnode
                             leftnode = n
                     else:
                         # PATH PATH WALL
                         # Create path at end of corridor
-                        n = Maze.Node((y,x))
+                        n = Maze.Node((y, x))
                         leftnode.Neighbours[1] = n
                         n.Neighbours[3] = leftnode
                         leftnode = None
@@ -72,14 +84,14 @@ class Maze:
                     if nxt == True:
                         # WALL PATH PATH
                         # Create path at start of corridor
-                        n = Maze.Node((y,x))
+                        n = Maze.Node((y, x))
                         leftnode = n
                     else:
                         # WALL PATH WALL
                         # Create node only if in dead end
                         if (data[rowaboveoffset + x] == 0) or (data[rowbelowoffset + x] == 0):
                             #print ("Create Node in dead end")
-                            n = Maze.Node((y,x))
+                            n = Maze.Node((y, x))
 
                 # If node isn't none, we can assume we can connect N-S somewhere
                 if n != None:
@@ -99,9 +111,9 @@ class Maze:
 
         # End row
         rowoffset = (height - 1) * width
-        for x in range (1, width - 1):
+        for x in range(1, width - 1):
             if data[rowoffset + x] > 0:
-                self.end = Maze.Node((height - 1,x))
+                self.end = Maze.Node((height - 1, x))
                 t = topnodes[x]
                 t.Neighbours[2] = self.end
                 self.end.Neighbours[0] = t

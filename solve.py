@@ -5,8 +5,8 @@ from mazes import Maze
 from factory import SolverFactory
 Image.MAX_IMAGE_PIXELS = None
 
-# usage:
-#!  python3 solve.py -m depthfirst/breadthfirst ./small.png ./small-copy.png
+# usage:             (method to be used)        (ip image)   (op image)
+#!  python3 solve.py -m depthfirst/breadthfirst -i small.png -o small-copy.png
 
 # Read command line arguments - the python argparse class is convenient here.
 
@@ -94,6 +94,7 @@ def main():
     parser.add_argument("-o", "--output", help="Solved output maze file")
     args = parser.parse_args()
 
+    # NOTE: while debugging, use F5 key,cause the debug button won't pass the arguments to the program
     solve(sf, args.method, args.input, args.output)
 
 
