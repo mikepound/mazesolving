@@ -2,10 +2,13 @@ from PIL import Image
 import time
 from mazes import Maze
 from factory import SolverFactory
+from concurrent.futures import ThreadPoolExecutor
 Image.MAX_IMAGE_PIXELS = None
 
 # Read command line arguments - the python argparse class is convenient here.
 import argparse
+
+MAX_DRAWING_WORKERS = 5
 
 def solve(factory, method, input_file, output_file):
     # Load Image
@@ -48,21 +51,14 @@ def solve(factory, method, input_file, output_file):
 
     print ("Saving Image")
     im = im.convert('RGB')
-    impixels = im.load()
-
     resultpath = [n.Position for n in result]
 
-    length = len(resultpath)
+    drawPathOnImage(im,resultpath)#threaded draw line 
+    
+    im.save(output_file)
 
-    for i in range(0, length - 1):
-        a = resultpath[i]
-        b = resultpath[i+1]
-
-        # Blue - red
-        r = int((i / length) * 255)
-        px = (r, 0, 255 - r)
-
-        if a[0] == b[0]:
+def draw_line(impixels, a, b, px): 
+    if a[0] == b[0]:
             # Ys equal - horizontal line
             for x in range(min(a[1],b[1]), max(a[1],b[1])):
                 impixels[x,a[0]] = px
@@ -71,7 +67,25 @@ def solve(factory, method, input_file, output_file):
             for y in range(min(a[0],b[0]), max(a[0],b[0]) + 1):
                 impixels[a[1],y] = px
 
-    im.save(output_file)
+def drawPathOnImage(imageObj: Image, ResultPath: list):
+    impixels = imageObj.load()
+    length = len(ResultPath)
+
+    with ThreadPoolExecutor(max_workers=MAX_DRAWING_WORKERS) as executor:
+        futures = []
+        for i in range(length - 1):
+            a = ResultPath[i]
+            b = ResultPath[i + 1]
+
+            # Gradient color (Blue -> Red)
+            r = int((i / length) * 255)
+            px = (r, 0, 255 - r)
+
+            futures.append(executor.submit(draw_line, impixels, a, b, px))
+
+        # join all threads
+        for future in futures:
+            future.result()
 
 
 def main():
